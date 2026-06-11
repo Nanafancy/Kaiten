@@ -19,6 +19,13 @@ impl CacheBackend {
         }
     }
 
+    pub async fn CacheFrontend {
+    pub async fn check_connection(&self) -> bool {
+        match self {
+            Self::Redis(c) => c.check_connection().await,
+            Self::InMemory(c) => c.check_connection().await,
+        }
+    }
     pub async fn get_raw(&self, key: &str) -> Result<Option<String>> {
         match self {
             Self::Redis(c) => c.get_raw(key).await,
